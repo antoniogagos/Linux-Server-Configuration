@@ -1,5 +1,9 @@
 # Linux-Server-Configuration
+Live at: [ec2-52-59-194-158.eu-central-1.compute.amazonaws.com](ec2-52-59-194-158.eu-central-1.compute.amazonaws.com)
 
+## Download RSA Key, restrict key access, and ssh into instance:
+ <code>ssh -i "antonio.pem" ubuntu@ec2-52-59-206-108.eu-central-1.compute.amazonaws.com</code>
+ * <code>chmod 400 antonio.pem</code>
 
 ## Installing & updating software
 <h3> Updating and Upgrading Available Package Lists</h3>
@@ -93,3 +97,5 @@
       - sudo pip install sqalchemy
       - sudo pip install psycopg2
     
+ ## Give SSH access to the new User
+ 
