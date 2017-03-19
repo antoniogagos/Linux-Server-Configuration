@@ -2,7 +2,7 @@
 Live at: [ec2-52-59-194-158.eu-central-1.compute.amazonaws.com](ec2-52-59-194-158.eu-central-1.compute.amazonaws.com)
 
 ## Download RSA Key, restrict key access, and ssh into instance:
- <code>ssh -i "antonio.pem" ubuntu@ec2-52-59-206-108.eu-central-1.compute.amazonaws.com</code>
+ * <code>ssh -i "antonio.pem" ubuntu@ec2-52-59-194-158.eu-central-1.compute.amazonaws.com</code>
  * <code>chmod 400 antonio.pem</code>
 
 ## Installing & updating software
@@ -25,7 +25,7 @@ Live at: [ec2-52-59-194-158.eu-central-1.compute.amazonaws.com](ec2-52-59-194-15
     <code>ssh {{name}}@127.0.0.1 -p 22</code>
   
   * <em>Giving sudo access to new user</em>
-  <code>sudo cp /etc/sudoers.d/vagrant /etc/sudoers.d/{{name}}</code>
+  <code>sudo cp /etc/sudoers.d/90-init-cloud-users /etc/sudoers.d/{{name}}</code>
   
   * <code>sudo nano /etc/sudoers.d/{{name}}</code>
   
@@ -99,3 +99,6 @@ Live at: [ec2-52-59-194-158.eu-central-1.compute.amazonaws.com](ec2-52-59-194-15
     
  ## Give SSH access to the new User
  
+ 
+ ##
+  * http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/managing-users.html
