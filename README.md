@@ -6,7 +6,7 @@ Live at: [ec2-52-59-194-158.eu-central-1.compute.amazonaws.com](ec2-52-59-194-15
  * <code>chmod 400 antonio.pem</code>
 
 ## Installing & updating software
-<h3> Updating and Upgrading Available Package Lists</h3>
+<h3> Updating and Upgrading Available Package List</h3>
 
   * <code>sudo apt-get update</code>
   
