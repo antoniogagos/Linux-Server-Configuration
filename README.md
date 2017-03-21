@@ -19,6 +19,7 @@
   * <code>sudo apt-get upgrade</code>
    
 <h3>Installing finger</h3>
+
   * <em>This application will look up various pieces of information about an user and display it in an easy to read format
     </em>
   
