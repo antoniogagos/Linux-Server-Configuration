@@ -1,9 +1,15 @@
 # Linux-Server-Configuration
-Live at: [ec2-52-59-194-158.eu-central-1.compute.amazonaws.com](ec2-52-59-194-158.eu-central-1.compute.amazonaws.com)
 
-## Download RSA Key, restrict key access, and ssh into instance:
+
+## 1.- Download RSA Key, restrict key access, and ssh into instance:
  * <code>ssh -i "antonio.pem" ubuntu@ec2-52-59-194-158.eu-central-1.compute.amazonaws.com</code>
- * <code>chmod 400 antonio.pem</code>
+ 
+ * <code>chmod 600 antonio.pem</code>
+ 
+ * Live at: [ec2-52-59-194-158.eu-central-1.compute.amazonaws.com](ec2-52-59-194-158.eu-central-1.compute.amazonaws.com)
+ 
+ * Accessible SSH port: 2200
+
 
 ## Installing & updating software
 <h3> Updating and Upgrading Available Package List</h3>
@@ -31,34 +37,30 @@ Live at: [ec2-52-59-194-158.eu-central-1.compute.amazonaws.com](ec2-52-59-194-15
   
   * <h4>Modify the vagrant text with the user name</h4>
   
-## Generating Key pairs
-
-  * In your local machine not in your server:
-    * <code>ssh-keygen</code>
-    
-    * File where you need to save the key <em>/Users/Udacity/.ssh/linuxCourse</em>
-    
-  * Installing a Public Key
+## Give SSH access to the new User
   
-    * Log into your server as the new user you've just created
+  * Log into your server as the new user you've just created
+   
+  * <code>mkdir .ssh</code>
     
-    * <code>mkdir .ssh</code>
+  * <code>touch .ssh/authorized_keys</code>
+        
+  * <code>nano .ssh/authorized_keys</code>
     
-    * <code>touch .ssh/authorized_keys</code>
+  * Paste the private key content into <code>.ssh/authorized_keys</code> in your server with the new user.
     
-    * <code>cat .ssh/linuxCourse.pub</code>
+  * <code>chmod 700 .ssh</code>
     
-    * <code>nano .ssh/authorized_keys</code>
+  * <code>chmod 644 .ssh/authorized_keys</code>
+  
+  * <code>vim /etc/ssh/sshd_config (Change ssh to 2200)</code>
+  
+  * <code>service ssh restart</code>
     
-    * Paste the linuxCourse.pub content into .ssh/authorized_keys in your server with the new user.
+  <h3>Log in using the Key pair</h3>
     
-    * <code>chmod 700 .ssh</code>
-    
-    * <code>chmod 644 .ssh/authorized_keys</code>
-    
-    <h3>Log in using the Key pair</h3>
-    
-        - <code>ssh {{name}}@127.0.0.1 -p2222 -i ~/.ssh/linuxCourse </code>
+     - <code>ssh -i "antonio.pem" ubuntu@ec2-52-59-194-158.eu-central-1.compute.amazonaws.com</code>
+   
         
 ## Forcing Key Based Authentication
    * <code>sudo nano /etc/ssh/sshd_config</code> and change <b>PasswordAuthentication</b> to <b>no</b>
@@ -83,22 +85,68 @@ Live at: [ec2-52-59-194-158.eu-central-1.compute.amazonaws.com](ec2-52-59-194-15
    
    * Install mod_wsgi <code>sudo apt-get install libapache2-mod-wsgi</code>
    
-   * Modify file <code>nano /etc/apache2/sites-enabled/000-default.conf</code>
+   * <code>sudo apt-get install postgresql postgresql-contrib</code>
    
-   * Add this<code>WSGIScriptAlias / /var/www/html/myapp.wsgi</code> line before the closing tag VirtualHost
+   * <code>sudo a2enmod wsgi</code>
    
-   * Then restart Apache </code>sudo apache2ctl restart</code>
+   * Then, change directory to <code>cd /var/www</code>
    
-   * You will now install PostgreSQL to server your data using the command <code>sudo apt-get install postgresql</code>
+   * <code>sudo git clone https://github.com/balusus/Item-Catalog.git</code>
    
+   * <code> sudo apt-get install python-pip </code>
    
+     <code> sudo pip install virtualenv</code>
+     
+     <code>sudo virtualenv catalog</code>
+     
+     <code>source catalog/bin/activate</code>
+     
+     <code>sudo pip install Flask</code>
+     
+     <code>sudo pip install -r requirements.txt</code>
+     
+   * Then, To deactivate the environment, give the following command: <code>deactivate</code>
    
-   * Install:
-      - sudo pip install sqalchemy
-      - sudo pip install psycopg2
-    
- ## Give SSH access to the new User
+   * Change directory to <code>cd /etc/apache2/sites-available</code>
+   
+   * Create the file catalog.conf: <code>sudo touch catalog.conf</code> with this content:
+      ```
+      <VirtualHost *:80>
+           ServerName ec2-52-59-194-158.eu-central-1.compute.amazonaws.com
+           ServerAdmin antoniogagos@gmail.com
+           WSGIScriptAlias / /var/www/Item-Catalog/catalog.wsgi
+           <Directory /var/www/Item-Catalog/>
+             Order allow,deny
+             Allow from all
+           </Directory>
+           Alias /static /var/www/Item-Catalog/static
+           <Directory /var/www/Item-Catalog/static/>
+             Order allow,deny
+             Allow from all
+           </Directory>
+           ErrorLog ${APACHE_LOG_DIR}/error.log
+           LogLevel warn
+           CustomLog ${APACHE_LOG_DIR}/access.log combined
+      </VirtualHost> 
+      ```
+   * Enable catalog.conf with this command: <code>sudo a2ensite catalog</code>
+   
+   * Now restart apache2: <code>sudo service apache2 restart</code>
+   
+   * Configure postgres:
+   
+     - <code>sudo su - postgres</code>
+     
+     - <code>psql</code>
+     
+     - <code>CREATE USER grader WITH PASSWORD 'udacity'</code>
+     
+     - <code>ALTER USER grader CREATEDB</code>
  
+ ## References
  
- ##
-  * http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/managing-users.html
+   * http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/managing-users.html
+   
+   * http://flask.pocoo.org/docs/0.12/deploying/mod_wsgi/
+   
+   * https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps
