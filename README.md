@@ -6,7 +6,7 @@
  
  * <code>chmod 600 antonio.pem</code>
  
- * Live at: [ec2-52-59-194-158.eu-central-1.compute.amazonaws.com](ec2-52-59-194-158.eu-central-1.compute.amazonaws.com)
+ * Live at: ec2-52-59-194-158.eu-central-1.compute.amazonaws.com
  
  * Accessible SSH port: 2200
 
