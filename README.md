@@ -136,13 +136,9 @@
    
    * Configure postgres:
    
-     - <code>sudo su - postgres</code>
-     
-     - <code>psql</code>
-     
-     - <code>CREATE USER grader WITH PASSWORD 'udacity'</code>
-     
-     - <code>ALTER USER grader CREATEDB</code>
+     * <code>sudo su - postgres</code>   
+     * In psql: <code>CREATE USER grader WITH PASSWORD 'udacity'</code>  
+     * <code>ALTER USER grader CREATEDB</code>
  
  ## References
  
