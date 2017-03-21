@@ -58,9 +58,9 @@
   
   * <code>service ssh restart</code>
     
-  <h3>Log in using the Key pair</h3>
-    
-     - <code>ssh -i "antonio.pem" grader@ec2-52-59-194-158.eu-central-1.compute.amazonaws.com</code>
+  * Log in using the Key pair: 
+  
+       <code>ssh -i "antonio.pem" grader@ec2-52-59-194-158.eu-central-1.compute.amazonaws.com</code>
    
         
 ## Forcing Key Based Authentication
