@@ -2,7 +2,7 @@
 
 
 ## 1.- Download RSA Key, restrict key access, and ssh into instance:
- * <code>ssh -i "antonio.pem" ubuntu@ec2-52-59-194-158.eu-central-1.compute.amazonaws.com</code>
+ * <code>ssh -i "antonio.pem" grader@ec2-52-59-194-158.eu-central-1.compute.amazonaws.com</code>
  
  * <code>chmod 600 antonio.pem</code>
  
@@ -25,17 +25,17 @@
   * <code>sudo apt-get install finger</code>
  
 ## Creating a new user
-  * <code>sudo adduser {{name}}</code>
+  * <code>sudo adduser grader</code>
   
   * <em>Connecting as the New User</em>
-    <code>ssh {{name}}@127.0.0.1 -p 22</code>
+    <code>ssh -i "antonio.pem" grader@ec2-52-59-194-158.eu-central-1.compute.amazonaws.com</code>
   
   * <em>Giving sudo access to new user</em>
-  <code>sudo cp /etc/sudoers.d/90-init-cloud-users /etc/sudoers.d/{{name}}</code>
+  <code>sudo cp /etc/sudoers.d/90-init-cloud-users /etc/sudoers.d/grader</code>
   
-  * <code>sudo nano /etc/sudoers.d/{{name}}</code>
+  * <code>sudo nano /etc/sudoers.d/grader</code>
   
-  * <h4>Modify the vagrant text with the user name</h4>
+  * <h4>Modify the vagrant text with grader</h4>
   
 ## Give SSH access to the new User
   
@@ -59,7 +59,7 @@
     
   <h3>Log in using the Key pair</h3>
     
-     - <code>ssh -i "antonio.pem" ubuntu@ec2-52-59-194-158.eu-central-1.compute.amazonaws.com</code>
+     - <code>ssh -i "antonio.pem" grader@ec2-52-59-194-158.eu-central-1.compute.amazonaws.com</code>
    
         
 ## Forcing Key Based Authentication
