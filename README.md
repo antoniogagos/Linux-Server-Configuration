@@ -4,7 +4,7 @@
 ## 1.- Download RSA Key, restrict key access, and ssh into instance:
  * <code>ssh -i "antonio.pem" grader@ec2-52-59-194-158.eu-central-1.compute.amazonaws.com</code>
  
- * <code>chmod 600 antonio.pem</code>
+ * <code>chmod 777 antonio.pem</code>
  
  * Live at: ec2-52-59-194-158.eu-central-1.compute.amazonaws.com
  
